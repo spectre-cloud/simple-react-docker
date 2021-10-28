@@ -1,0 +1,23 @@
+version: "3.7"
+networks :
+  frontend-network:
+services:
+  frontend_service:
+    build: 
+      context: .
+      dockerfile: Dockerfile.dev
+    ports: 
+      - "3001:3000"
+    volumes:
+      - ".:/app" 
+    networks:
+      - frontend-network
+  test-suite:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ".:/app"
+    networks:
+      - frontend-network
+    command: ["npm","run","test"] 

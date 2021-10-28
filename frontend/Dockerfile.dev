@@ -1,0 +1,9 @@
+FROM node:alpine
+WORKDIR /app
+COPY package.json .
+RUN npm config delete proxy
+RUN npm install
+COPY . . 
+#no need of copy since bind mounting is happening but it is good practice to put copy because without using compose it will be helpful
+#VOLUME ~/Desktop/dockers/sample/react_app/frontend:/app
+CMD ["npm", "run", "start"]
